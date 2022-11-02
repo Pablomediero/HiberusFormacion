@@ -11,14 +11,15 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_receta1Fragment"
-            app:destination="@id/receta1Fragment" />
+            android:id="@+id/action_homeFragment_to_recetaDetailFragment"
+            app:destination="@id/recetaDetail" />
     </fragment>
     <fragment
-        android:id="@+id/receta1Fragment"
+        android:id="@+id/recetaDetail"
         android:name="com.example.navegation.RecetaDetailFragment"
         android:label="fragment_receta1"
         tools:layout="@layout/fragment_recetadetail" >
-        <argument android:name="claveReceta" />
+        <argument android:name="receta"
+            app:argType="com.example.navegation.Receta" />
     </fragment>
 </navigation>

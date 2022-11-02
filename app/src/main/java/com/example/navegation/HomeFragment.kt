@@ -1,21 +1,30 @@
 package com.example.navegation
 
 import android.os.Bundle
+import android.text.Layout.Directions
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.navegation.databinding.ActivityMainBinding
 import com.example.navegation.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var adapter: Adapter
+
+    val recetaListener =
+        object : Adapter.RecetaListener {
+            override fun onItemClick(receta: Receta) {
+                val action = HomeFragmentDirections.actionHomeFragmentToRecetaDetailFragment(receta)
+                findNavController().navigate(action)
+            }
+
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,32 +48,26 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*var tvReceta1: TextView = view.findViewById(R.id.recetas1)
-        var tvReceta2: TextView = view.findViewById(R.id.recetas2)
 
-        tvReceta1.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.receta1Fragment)
 
-        }
-
-        tvReceta2.setOnClickListener{
-            Navigation.findNavController(it).navigate(R.id.receta2Fragment)
-
-        }*/
-        val recetaListener =
-            object : Adapter.RecetaListener {
-                override fun onItemClick(receta: Receta) {
-
-                }
-
-            }
-        initRecyvlerView(view)
+        initRecyclerView()
     }
 
-    fun initRecyvlerView(view: View){
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerRecetas)
+    fun initRecyclerView(){
+        val recyclerView = binding.rvRecetas
+        adapter = Adapter()
+
         recyclerView.layoutManager = LinearLayoutManager(this.context)
-        recyclerView.adapter = Adapter()
+        recyclerView.adapter = adapter
+        adapter.setRecetaListener(recetaListener)
+        adapter.submitList(
+            listOf(
+                recetaLentejas,
+                recetaGarbanzos,
+                recetaPasta
+
+            )
+        )
     }
 
 
