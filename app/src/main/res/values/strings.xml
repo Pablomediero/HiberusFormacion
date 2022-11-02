@@ -2,4 +2,14 @@
     <string name="app_name">Navegation</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="listado">LISTADO</string>
+    <string name="recetas">RECETAS</string>
+    <string name="guion">-</string>
+    <string name="nombre">Nombre</string>
+    <string name="informaci_n">Información:</string>
+    <string name="definir_informacion">Definir Informacion</string>
+    <string name="definir_ingredientes">Definir Ingredientes</string>
+    <string name="elaboraci_n">Elaboración:</string>
+    <string name="definir_elaboraci_n">Definir Elaboración</string>
+    <string name="simb">~</string>
 </resources>

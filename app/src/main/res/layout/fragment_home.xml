@@ -3,21 +3,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/teal_200"
     tools:context=".HomeFragment">
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="RECETAS"
-        android:textSize="40dp"
-        />
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:background="@color/teal_200">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:background="@color/teal_200"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/simb"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@color/teal_200"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRecetas"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/listado"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recetas"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:background="@color/teal_200"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/simb"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recetas"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>
