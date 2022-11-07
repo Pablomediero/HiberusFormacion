@@ -7,19 +7,20 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.navegation.HomeFragment"
+        android:name="com.example.navegation.app.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_recetaDetailFragment"
-            app:destination="@id/recetaDetail" />
+            android:id="@+id/action_homeFragment_to_userDetailFragment"
+            app:destination="@id/userDetail" />
     </fragment>
     <fragment
-        android:id="@+id/recetaDetail"
-        android:name="com.example.navegation.RecetaDetailFragment"
-        android:label="fragment_receta1"
-        tools:layout="@layout/fragment_recetadetail" >
-        <argument android:name="receta"
-            app:argType="com.example.navegation.Receta" />
+        android:id="@+id/userDetail"
+        android:name="com.example.navegation.app.UserDetailFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_userdetail" >
+        <argument
+            android:name="user"
+            app:argType="com.example.navegation.model.user.User" />
     </fragment>
 </navigation>

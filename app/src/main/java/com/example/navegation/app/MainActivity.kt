@@ -1,7 +1,8 @@
-package com.example.navegation
+package com.example.navegation.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.navegation.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

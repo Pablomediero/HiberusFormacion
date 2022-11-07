@@ -1,7 +1,6 @@
-package com.example.navegation
+package com.example.navegation.app
 
 import android.os.Bundle
-import android.text.Layout.Directions
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,30 +8,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.navegation.data.DataRespository
 import com.example.navegation.databinding.FragmentHomeBinding
+import com.example.navegation.model.user.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: Adapter
+    private lateinit var dataRepository: DataRespository
 
-    val recetaListener =
-        object : Adapter.RecetaListener {
-            override fun onItemClick(receta: Receta) {
-                val action = HomeFragmentDirections.actionHomeFragmentToRecetaDetailFragment(receta)
+    private val userListener =
+        object : Adapter.UserListener {
+            override fun onItemClick(user: User) {
+                val action = HomeFragmentDirections.actionHomeFragmentToUserDetailFragment(user)
                 findNavController().navigate(action)
             }
 
         }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(
             inflater,
             container,
@@ -49,26 +52,28 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initRecyclerView()
+
+        dataRepository = DataRespository()
+        CoroutineScope(Dispatchers.IO).launch {
+            val users = dataRepository.getUsers()
+            adapter.submitList(users)
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            val albums = dataRepository.getAlbums()
+            Log.i("Async", albums.toString())
+        }
     }
 
     fun initRecyclerView(){
-        val recyclerView = binding.rvRecetas
+        val recyclerView = binding.rvUsers
         adapter = Adapter()
-
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.adapter = adapter
-        adapter.setRecetaListener(recetaListener)
+        adapter.setUserListener(userListener)
         adapter.submitList(
-            listOf(
-                recetaLentejas,
-                recetaGarbanzos,
-                recetaPasta
-
-            )
+            emptyList()
         )
     }
-
 
 }

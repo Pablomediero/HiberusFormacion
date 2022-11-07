@@ -17,13 +17,12 @@
         android:src="@drawable/ham"/>
 
     <TextView
-        android:id="@+id/tv_receta_nombre"
+        android:id="@+id/tv_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="30dp"
-        android:textSize="20sp"
-        tools:text="Texto" />
+        android:textSize="20sp" />
 
     <ImageView
         android:layout_width="wrap_content"

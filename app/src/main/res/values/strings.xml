@@ -12,4 +12,13 @@
     <string name="elaboraci_n">Elaboración:</string>
     <string name="definir_elaboraci_n">Definir Elaboración</string>
     <string name="simb">~</string>
+    <string name="users">Usuarios\n</string>
+    <string name="nameUser">Nombre Completo</string>
+    <string name="userNameUser">Nombre de usuario</string>
+    <string name="email">Email de usuario</string>
+    <string name="idUser">Id de Usuario</string>
+    <string name="phone">Teléfono de Usuario</string>
+    <string name="definir_phone">Definir Phone</string>
+    <string name="website">Web de usuario</string>
+    <string name="definir_website">Definir website</string>
 </resources>
