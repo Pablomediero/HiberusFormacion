@@ -21,4 +21,7 @@
     <string name="definir_phone">Definir Phone</string>
     <string name="website">Web de usuario</string>
     <string name="definir_website">Definir website</string>
+    <string name="address">Direccion de Usuario</string>
+    <string name="company">Company de Usuario</string>
+    <string name="albumName">Nombre de Album</string>
 </resources>

@@ -59,10 +59,7 @@ class HomeFragment : Fragment() {
             val users = dataRepository.getUsers()
             adapter.submitList(users)
         }
-        CoroutineScope(Dispatchers.IO).launch {
-            val albums = dataRepository.getAlbums()
-            Log.i("Async", albums.toString())
-        }
+
     }
 
     fun initRecyclerView(){
