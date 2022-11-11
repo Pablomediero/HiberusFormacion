@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.navegation.data.DataRespository
@@ -21,6 +22,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: Adapter
     private lateinit var dataRepository: DataRespository
+    private lateinit var viewModel: UsersViewModel
 
     private val userListener =
         object : Adapter.UserListener {
@@ -30,7 +32,6 @@ class HomeFragment : Fragment() {
             }
 
         }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,8 +54,8 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-
-        dataRepository = DataRespository()
+        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
+        dataRepository = DataRespository(requireContext())
         CoroutineScope(Dispatchers.IO).launch {
             val users = dataRepository.getUsers()
             adapter.submitList(users)
