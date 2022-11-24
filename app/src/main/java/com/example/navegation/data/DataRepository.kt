@@ -2,6 +2,7 @@ package com.example.navegation.data
 
 import android.content.Context
 import android.util.Log
+import com.example.navegation.app.common.ResourceState
 import com.example.navegation.data.cache.CacheMapper
 import com.example.navegation.data.model.album.AlbumResponse
 import com.example.navegation.data.model.photo.PhotoResponse
@@ -15,14 +16,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 
-class DataRespository(context: Context) {
+class DataRepository(context: Context) {
     private val userService: UserService = UserServiceFactory.makeTrazaService()
     private val responseMapper: ResponseMapper = ResponseMapper()
     private val cacheMapper: CacheMapper = CacheMapper()
     private val database = DatabaseBuilder.getInstance(context)
 
 
-    suspend fun getUsers(): List<User> = withContext(Dispatchers.IO) {
+    suspend fun getUsers(): ResourceState<List<User>> = withContext(Dispatchers.IO) {
         if (database.userDao().getAllUser().isEmpty()) {
             return@withContext try {
                 val callUsers = async { userService.getUsers() }
@@ -59,24 +60,21 @@ class DataRespository(context: Context) {
                             .insertCompany(cacheMapper.mapToCached(user.company, user))
 
                         user.albums.forEach{album ->
-                            Log.i("BBDD", album.id.toString())
                             database.albumDao().insertAlbum(cacheMapper.mapToCached(album))
-
-
                             album.photos.forEach{photo ->
-                                Log.i("BBDD", photo.id.toString())
                                 database.photoDao().insertPhoto(cacheMapper.mapToCached(photo))
                             }
                         }
                     }
 
-                    userList
+                    ResourceState.Success(userList)
                 } else {
-                    emptyList()
+                    ResourceState.Success(emptyList())
+
                 }
             } catch (e: Exception) {
                 Log.e("Throwable Data Repository", e.toString())
-                emptyList()
+                ResourceState.Error(e.message!!)
             }
         } else {
             val userL = database.userDao().getAllUser().map { cachedUser ->
@@ -99,7 +97,7 @@ class DataRespository(context: Context) {
                 cacheMapper.mapFromCached(cachedUser, address, company, albums)
             }
 
-            userL
+            ResourceState.Success(userL)
         }
 
     }
